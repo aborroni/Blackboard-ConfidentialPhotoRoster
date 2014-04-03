@@ -110,7 +110,7 @@ If you are interested in making the photos available to your students, go to you
 		// display the pictures of students
 		%><span class='style2'>If you are off-campus, the photos will not display. To see them from off-campus you will need to use VPN to connect to our network before viewing this page. 
 		Information on connecting via VPN can be found at <a href="http://citwiki.oberlin.edu/index.php/VPN#Where_do_I_get_VPN_software.3F" target="_blank"> http://citwiki.oberlin.edu/index.php/VPN </a></span> .<br/>
-		<br/><b>Student/Participant members in this site:</b><br/><table cellpadding="10"><tr>
+		<br/><b>Student/Participant members in this site:</b><br/><table cellpadding="10" style="page-break-inside:avoid"><tr>
 		
 		<a href="https://oberlintest.blackboard.com/webapps/blackboard/execute/displayEmail?navItem=cp_send_email_all_students&course_id= <%=bbPm.generateId(Course.DATA_TYPE, request.getParameter("course_id")) %> ">email all students/participants in this site</a>
 		<%
@@ -123,7 +123,7 @@ If you are interested in making the photos available to your students, go to you
 			%>
 			<td width="170px"><div align="left"><img src="http://octet1.csr.oberlin.edu/octet/Bb/Photos/expo/<%=thisUser.getUserName() %>/profileImage" onError="imageError(this)">
 				<br>
-				<%=thisUser.getGivenName() %> &nbsp;<%=thisUser.getFamilyName()+" " +s %><br/>
+				<%=thisUser.getGivenName() %> &nbsp;<%=thisUser.getFamilyName()%><br/>
 				<span class='style2'><a href="mailto:<%=thisUser.getEmailAddress() %>"><%=thisUser.getEmailAddress() %></a></span><br/>
 				<%=thisUser.getBusinessFax() %><br/>
 				<%=thisUser.getDepartment() %><br/>
@@ -153,11 +153,13 @@ If you are interested in making the photos available to your students, go to you
 			<%
 			if(s%5==0)
 			{
-				if(s%20==15){
-					%></tr>
-					<tr style="page-break-after:always;page-break-inside:avoid;"><%
+				if(s%20==0){
+					%></tr> </table style="page-break-inside:avoid">
+					<span style="page-break-after:always"></span>
+					<table cellpadding="10">
+					<tr><%
 				}else{
-					%></tr"><tr style="page-break-inside:avoid;"><%
+					%></tr><tr><%
 				}
 			}
 		}
