@@ -54,6 +54,7 @@ Id courseId = bbPm.generateId(Course.DATA_TYPE, request.getParameter("course_id"
  <bbUI:breadcrumb>Confidential Photo Roster</bbUI:breadcrumb>
 </bbUI:breadcrumbBar>
 <bbUI:titleBar>Confidential Photo Roster</bbUI:titleBar>
+<div style="background-color:white;">
 <%
 // makes sure that this option should be available for the course we are in
 // Exco course along with any non-department, non-advising oganisations do not have access
@@ -171,6 +172,7 @@ If you are interested in making the photos available to your students, go to you
 }
 
 %>
+</div>
 </bbUI:coursePage>
 </bbUI:docTemplate>
  </bbData:context>
