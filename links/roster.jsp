@@ -57,11 +57,11 @@ Id courseId = bbPm.generateId(Course.DATA_TYPE, request.getParameter("course_id"
 <div style="background-color:white;">
 <%
 // makes sure that this option should be available for the course we are in
-// Exco course along with any non-department, non-advising oganisations do not have access
+// Exco course along with any non-department, non-advising oganizations do not have access
 //get the external course id - this is the Id you can search for in blackboard e.g. "DEPT-BIOL" or "200702-GEOL-110-01"
 String id = ((Course)courseId.load()).getCourseId();
 // is this a course which should have the roster? Roster is only made available for regular courses
-if(id.startsWith("201")||id.startsWith("P-")||id.startsWith("OCTET-")||id.startsWith("SL-")||id.startsWith("CD-")||id.startsWith("DEPT-")||id.startsWith("CON-AllStu")||id.startsWith("AD-")){
+if(!id.startsWith("StuOrg") && !id.matches(".*EXCO.*")){
 //if the list is modified, be sure to also change it in the Student Roster Public version
 %>
 
@@ -124,7 +124,11 @@ If you are interested in making the photos available to your students, go to you
 			%>
 			<td width="170px"><div align="left"><img src="http://octet1.csr.oberlin.edu/octet/Bb/Photos/expo/<%=thisUser.getUserName() %>/profileImage" onError="imageError(this)">
 				<br>
-				<%=thisUser.getGivenName() %> &nbsp;<%=thisUser.getFamilyName()%><br/>
+				<%
+				String firstName = thisUser.getGivenName();
+				if(firstName.contains("(")){firstName = firstName.substring(0,(firstName.indexOf('('))-1);}
+				%>
+				<%=firstName %> &nbsp;<%=thisUser.getFamilyName()%><br/>
 				<span class='style2'><a href="mailto:<%=thisUser.getEmailAddress() %>"><%=thisUser.getEmailAddress() %></a></span><br/>
 				<%=thisUser.getBusinessFax() %><br/>
 				<%=thisUser.getDepartment() %><br/>
@@ -168,7 +172,7 @@ If you are interested in making the photos available to your students, go to you
 		</table>
 		<%
 } else {
-	out.print("This option will allows for potentially confidential student information to be seen. It is currently not available for your course/organization. <br/>Contact OCTET@oberlin.edu if you wish to make this available in your course/organization. <br/>If you are using this in an organization to view faculty and/or staff information, try activating and using the 'Photo Roster for Fac Staff' tool in your site. Information on how to do this can be found at <a href='http://octet1.csr.oberlin.edu/wp/BBhelp/' target='_blank'>http://octet1.csr.oberlin.edu/wp/BBhelp/</a> Search for 'photo roster' to find appropriate post. ");
+	out.print("This option allows for potentially confidential student information to be seen. It is currently not available for your course/organization. <br/>Contact OCTET@oberlin.edu if you wish to make this available in your course/organization. <br/>If you are using this in an organization to view faculty and/or staff information, try activating and using the 'Photo Roster for Fac Staff' tool in your site. Information on how to do this can be found at <a href='http://octet1.csr.oberlin.edu/wp/BBhelp/' target='_blank'>http://octet1.csr.oberlin.edu/wp/BBhelp/</a> Search for 'photo roster' to find appropriate post. ");
 }
 
 %>
