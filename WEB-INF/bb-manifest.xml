@@ -2,12 +2,12 @@
 <manifest>
   <!-- core extension information -->
   <plugin>
-    <name value= "OCTET  Student Roster Photos - Confidential"/>
-    <handle value= "ConfRost"/>
+    <name value= "OCTET  Student RosterEX - Confidential"/>
+    <handle value= "ConfRostEX"/>
     <description value= "Student and Participant Roster for Leaders and Instructors."/>
-    <version value= "1.3.0"/>
+    <version value= "2.0"/>
     <requires>
-    	<bbversion value="9.1.7"/>
+    	<bbversion value="9.1.14"/>
     </requires>
     <vendor>
       <id value="octt"/>
@@ -22,13 +22,13 @@
 
     <!-- Tools defined by this extension -->
     <application-defs>
-      <application handle="ConfRost" type="course" use-ssl="true" name="Student Roster - Confidential (OCTET)" can-allow-guest="false"
+      <application handle="ConfRostEX" type="course" use-ssl="true" name="Student RosterEX - Confidential (OCTET)" can-allow-guest="false"
        small-icon="images/Roster.png" large-icon="images/Roster.png">
         <description lang="en_US">Application installed as part of the OCTET Student Roster Suite.</description>
         <links>
 		   <link>
             <type value="course_tool"/>
-            <name value="Student Roster - Confidential (OCTET)"/>
+            <name value="Student RosterEX - Confidential (OCTET)"/>
             <url value="links/roster.jsp"/>
             <description value="A tool which displays photos of enrolled students with links to email addresses and other information for those that have access to the Control Panel." />
             <icons>

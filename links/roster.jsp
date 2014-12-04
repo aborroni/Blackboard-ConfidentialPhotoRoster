@@ -4,6 +4,7 @@
 				blackboard.data.*,
                 blackboard.data.user.*,
 				blackboard.data.course.*,
+				blackboard.data.role.PortalRole,
                 blackboard.persist.*,
                 blackboard.persist.user.*,
 				blackboard.persist.course.*,
@@ -54,7 +55,7 @@ Id courseId = bbPm.generateId(Course.DATA_TYPE, request.getParameter("course_id"
  <bbUI:breadcrumb>Confidential Photo Roster</bbUI:breadcrumb>
 </bbUI:breadcrumbBar>
 <bbUI:titleBar>Confidential Photo Roster</bbUI:titleBar>
-<div style="background-color:white;">
+<div style="background-color:#FFFFFF;padding:20px;">
 <%
 // makes sure that this option should be available for the course we are in
 // Exco course along with any non-department, non-advising oganizations do not have access
@@ -113,7 +114,7 @@ If you are interested in making the photos available to your students, go to you
 		Information on connecting via VPN can be found at <a href="http://citwiki.oberlin.edu/index.php/VPN#Where_do_I_get_VPN_software.3F" target="_blank"> http://citwiki.oberlin.edu/index.php/VPN </a></span> .<br/>
 		<br/><b>Student/Participant members in this site:</b><br/><table cellpadding="10" style="page-break-inside:avoid"><tr>
 		
-		<a href="https://oberlintest.blackboard.com/webapps/blackboard/execute/displayEmail?navItem=cp_send_email_all_students&course_id= <%=bbPm.generateId(Course.DATA_TYPE, request.getParameter("course_id")) %> ">email all students/participants in this site</a>
+		<a href="/webapps/blackboard/execute/displayEmail?navItem=cp_send_email_all_students&course_id= <%=bbPm.generateId(Course.DATA_TYPE, request.getParameter("course_id")) %> ">email all students/participants in this site</a>
 		<%
 		BbList.Iterator studIter = students.getFilteringIterator();
 		int s = 0;
@@ -125,32 +126,36 @@ If you are interested in making the photos available to your students, go to you
 			<td width="170px"><div align="left"><img src="http://octet1.csr.oberlin.edu/octet/Bb/Photos/expo/<%=thisUser.getUserName() %>/profileImage" onError="imageError(this)">
 				<br>
 				<%
-				String firstName = thisUser.getGivenName();
-				if(firstName.contains("(")){firstName = firstName.substring(0,(firstName.indexOf('('))-1);}
+				PortalRole userPortRole = thisUser.getPortalRole();
+				String userPortalRole = "None"; // this is not displayed
+				if(userPortRole!=null){
+					userPortalRole = userPortRole.getRoleName();
+				}
 				%>
-				<%=firstName %> &nbsp;<%=thisUser.getFamilyName()%><br/>
+				<%=thisUser.getGivenName()%>&nbsp;<%=thisUser.getFamilyName()%><br/>
 				<span class='style2'><a href="mailto:<%=thisUser.getEmailAddress() %>"><%=thisUser.getEmailAddress() %></a></span><br/>
-				<%=thisUser.getBusinessFax() %><br/>
-				<%=thisUser.getDepartment() %><br/>
+                <%=thisUser.getDepartment() %><br/>
+                <%=thisUser.getBusinessFax() %><br/>
 				<span class="style2">
 			 	<% 
-			 	try { thisUser.getStudentId().substring(5);
-			 		 if (thisUser.getStudentId().substring(3).startsWith("Grier")) {%>Class Dean: <br/> <a href="mailto:Brenda.Grier-Miller@oberlin.edu">Brenda.Grier-Miller@oberlin.edu</a>
-			 		<% } else 
-					if (thisUser.getStudentId().substring(3).startsWith("Davidson")) {%>Class Dean: <br/> <a href="mailto:Kimberly.Jackson.Davidson@oberlin.edu">Kimberly.Jackson.Davidson@oberlin.edu</a>
-					<% } else 
-					if (thisUser.getStudentId().substring(3).startsWith("Burgdorf")) {%>Class Dean: <br/> <a href="mailto:Monique.Burgdorf@oberlin.edu">Monique.Burgdorf@oberlin.edu</a>
-					<% } else 
-					if (thisUser.getStudentId().substring(3).startsWith("Donaldson")) {%>Class Dean: <br/> <a href="mailto:Chris.Donaldson@oberlin.edu">Chris.Donaldson@oberlin.edu</a>
-					<% } else 
-					if (thisUser.getStudentId().substring(3).startsWith("Flood")) {%>Class Dean: <br/> <a href="mailto:Lori.Flood@oberlin.edu">Lori.Flood@oberlin.edu></a>
-					<% } else 
-					if (thisUser.getStudentId().substring(3).startsWith("Hayden")) {%>Class Dean: <br/> <a href="mailto:Matthew.Hayden@oberlin.edu">Matthew.Hayden@oberlin.edu</a>
-					<% }
+				if(userPortalRole.equals("Student")){
+					try { thisUser.getStudentId().substring(5);
+			 			 if (thisUser.getStudentId().substring(3).startsWith("Grier")) {%>Class Dean: <br/> <a href="mailto:Brenda.Grier-Miller@oberlin.edu">Brenda.Grier-Miller@oberlin.edu</a>
+			 			<% } else 
+						if (thisUser.getStudentId().substring(3).startsWith("Davidson")) {%>Class Dean: <br/> <a href="mailto:Kimberly.Jackson.Davidson@oberlin.edu">Kimberly.Jackson.Davidson@oberlin.edu</a>
+						<% } else 
+						if (thisUser.getStudentId().substring(3).startsWith("Burgdorf")) {%>Class Dean: <br/> <a href="mailto:Monique.Burgdorf@oberlin.edu">Monique.Burgdorf@oberlin.edu</a>
+						<% } else 
+						if (thisUser.getStudentId().substring(3).startsWith("Donaldson")) {%>Class Dean: <br/> <a href="mailto:Chris.Donaldson@oberlin.edu">Chris.Donaldson@oberlin.edu</a>
+						<% } else 
+						if (thisUser.getStudentId().substring(3).startsWith("Flood")) {%>Class Dean: <br/> <a href="mailto:Lori.Flood@oberlin.edu">Lori.Flood@oberlin.edu></a>
+						<% } else 
+						if (thisUser.getStudentId().substring(3).startsWith("Hayden")) {%>Class Dean: <br/> <a href="mailto:Matthew.Hayden@oberlin.edu">Matthew.Hayden@oberlin.edu</a>
+						<% }
+					}
+			 		catch(StringIndexOutOfBoundsException e){out.println("<font size='2' ><i>No class Dean listed.<br/> Contact the Dean of Students <br/>office at x58462</i></font>");
+			 		}
 				}
-			 	catch(StringIndexOutOfBoundsException e){out.println("<font size='2' ><i>No class Dean listed.<br/> Contact the Dean of Students <br/>office at x58462</i></font>");
-			 		} 
-			 	
 			 		%>
 			 	</span>
 				<br/>
