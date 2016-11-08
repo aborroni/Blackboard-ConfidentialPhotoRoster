@@ -123,7 +123,8 @@ If you are interested in making the photos available to your students, go to you
 			User thisUser = (User)studIter.next();
 			s++;
 			%>
-			<td width="170px"><div align="left"><img src="http://octet1.csr.oberlin.edu/octet/Bb/Photos/expo/<%=thisUser.getUserName() %>/profileImage" onError="imageError(this)">
+			<td width="170px"><div align="left"><img width="110" height="150" src="https://idcard.oberlin.edu/feed/photo/profile.php?id=<%=thisUser.getUserName() %>" onError="imageError(this)">
+			<!--"http://octet1.csr.oberlin.edu/octet/Bb/Photos/expo/<%=thisUser.getUserName() %>/profileImage"-->
 				<br>
 				<%
 				PortalRole userPortRole = thisUser.getPortalRole();
@@ -138,25 +139,29 @@ If you are interested in making the photos available to your students, go to you
                 <%=thisUser.getBusinessFax() %><br/>
 				<span class="style2">
 			 	<% 
-				if(userPortalRole.equals("Student")){
-					try { thisUser.getStudentId().substring(5);
-			 			 if (thisUser.getStudentId().substring(3).startsWith("Grier")) {%>Class Dean: <br/> <a href="mailto:Brenda.Grier-Miller@oberlin.edu">Brenda.Grier-Miller@oberlin.edu</a>
-			 			<% } else 
-						if (thisUser.getStudentId().substring(3).startsWith("Davidson")) {%>Class Dean: <br/> <a href="mailto:Kimberly.Jackson.Davidson@oberlin.edu">Kimberly.Jackson.Davidson@oberlin.edu</a>
-						<% } else 
-						if (thisUser.getStudentId().substring(3).startsWith("Burgdorf")) {%>Class Dean: <br/> <a href="mailto:Monique.Burgdorf@oberlin.edu">Monique.Burgdorf@oberlin.edu</a>
-						<% } else 
-						if (thisUser.getStudentId().substring(3).startsWith("Donaldson")) {%>Class Dean: <br/> <a href="mailto:Chris.Donaldson@oberlin.edu">Chris.Donaldson@oberlin.edu</a>
-						<% } else 
-						if (thisUser.getStudentId().substring(3).startsWith("Flood")) {%>Class Dean: <br/> <a href="mailto:Lori.Flood@oberlin.edu">Lori.Flood@oberlin.edu></a>
-						<% } else 
-						if (thisUser.getStudentId().substring(3).startsWith("Hayden")) {%>Class Dean: <br/> <a href="mailto:Matthew.Hayden@oberlin.edu">Matthew.Hayden@oberlin.edu</a>
-						<% }
-					}
-			 		catch(StringIndexOutOfBoundsException e){out.println("<font size='2' ><i>No class Dean listed.<br/> Contact the Dean of Students <br/>office at x58462</i></font>");
-			 		}
+			 	if (thisUser.getOtherName().length() > 0) {
+		 			if (thisUser.getOtherName().substring(3).startsWith("Grier")) {%>Class Dean: <br/> <a href="mailto:Brenda.Grier-Miller@oberlin.edu">Brenda.Grier-Miller@oberlin.edu</a>
+		 			<% } else 
+					if (thisUser.getOtherName().substring(3).startsWith("Davidson")) {%>Class Dean: <br/> <a href="mailto:Kimberly.Jackson.Davidson@oberlin.edu">Kimberly.Jackson.Davidson@oberlin.edu</a>
+					<% } else 
+					if (thisUser.getOtherName().substring(3).startsWith("Burgdorf")) {%>Class Dean: <br/> <a href="mailto:Monique.Burgdorf@oberlin.edu">Monique.Burgdorf@oberlin.edu</a>
+					<% } else 
+					if (thisUser.getOtherName().substring(3).startsWith("Donaldson")) {%>Class Dean: <br/> <a href="mailto:Chris.Donaldson@oberlin.edu">Chris.Donaldson@oberlin.edu</a>
+					<% } else 
+					if (thisUser.getOtherName().substring(3).startsWith("Flood")) {%>Class Dean: <br/> <a href="mailto:Lori.Flood@oberlin.edu">Lori.Flood@oberlin.edu></a>
+					<% } else 
+					if (thisUser.getOtherName().substring(3).startsWith("Hayden")) {%>Class Dean: <br/> <a href="mailto:Matthew.Hayden@oberlin.edu">Matthew.Hayden@oberlin.edu</a>
+					<% } else 
+					if (thisUser.getOtherName().substring(3).startsWith("Salim")) {%>Class Dean: <br/> <a href="mailto:Amy.Salim@oberlin.edu">Amy.Salim@oberlin.edu</a>
+					<% } else 
+					if (thisUser.getOtherName().substring(3).startsWith("Kawaguchi")) {%>Class Dean: <br/> <a href="mailto:Shozo.Kawaguchi@oberlin.edu">Shozo.Kawaguchi@oberlin.edu</a>
+					<% } else 
+					if (thisUser.getOtherName().substring(3).startsWith("Hamdan")) {%>Class Dean: <br/> <a href="mailto:Dana.Hamdan@oberlin.edu">Dana.Hamdan@oberlin.edu</a>
+					<% } else 
+					if (thisUser.getOtherName().substring(3).startsWith("Myers")) {%>Class Dean: <br/> <a href="mailto:tmyers@oberlin.edu">tmyers@oberlin.edu</a>
+					<% }
 				}
-			 		%>
+			 	%>
 			 	</span>
 				<br/>
 				</div></td>
