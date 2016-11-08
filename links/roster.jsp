@@ -139,7 +139,7 @@ If you are interested in making the photos available to your students, go to you
                 <%=thisUser.getBusinessFax() %><br/>
 				<span class="style2">
 			 	<% 
-			 	if (thisUser.getOtherName().length() > 0) {
+			 	if (thisUser.getOtherName().length() > 1) {
 		 			if (thisUser.getOtherName().substring(3).startsWith("Grier")) {%>Class Dean: <br/> <a href="mailto:Brenda.Grier-Miller@oberlin.edu">Brenda.Grier-Miller@oberlin.edu</a>
 		 			<% } else 
 					if (thisUser.getOtherName().substring(3).startsWith("Davidson")) {%>Class Dean: <br/> <a href="mailto:Kimberly.Jackson.Davidson@oberlin.edu">Kimberly.Jackson.Davidson@oberlin.edu</a>
