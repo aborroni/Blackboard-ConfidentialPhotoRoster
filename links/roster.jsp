@@ -123,8 +123,7 @@ If you are interested in making the photos available to your students, go to you
 			User thisUser = (User)studIter.next();
 			s++;
 			%>
-			<td width="170px"><div align="left"><img width="110" height="150" src="https://idcard.oberlin.edu/feed/photo/profile.php?id=<%=thisUser.getUserName() %>" onError="imageError(this)">
-			<!--"http://octet1.csr.oberlin.edu/octet/Bb/Photos/expo/<%=thisUser.getUserName() %>/profileImage"-->
+			<td width="170px"><div align="left"><img width="110" height="150" src="https://idcard.oberlin.edu/feed/photo/profile.php?id=<%=thisUser.getUserName()%>&b" onError="imageError(this)">
 				<br>
 				<%
 				PortalRole userPortRole = thisUser.getPortalRole();
