@@ -12,13 +12,7 @@
                 blackboard.platform.persistence.*"
         errorPage="/error.jsp"                
 %>
-<SCRIPT LANGUAGE="JavaScript">
-function imageError(theImage)
-{
-theImage.src="https://idcard.oberlin.edu/feed/photo/profile.php?id=nophotos&b";
-theImage.onerror = null;
-}
-</script>
+
 <%@ taglib uri="/bbData" prefix="bbData"%>                
 <%@ taglib uri="/bbUI" prefix="bbUI"%>
 <bbData:context id="ctx">
